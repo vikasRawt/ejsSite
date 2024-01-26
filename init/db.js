@@ -11,12 +11,12 @@ try {
 }
 }
 
-const initDb = async()=>{
-    await Listing.deleteMany({});
-    await Listing.insertMany(allData.data);
-    console.log("data added all")
-}
+// const initDb = async()=>{
+//     await Listing.deleteMany({});
+//     await Listing.insertMany(allData.data);
+//     console.log("data added all")
+// }
 
-initDb();
+// initDb();
 
 module.exports = dbConn;
