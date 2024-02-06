@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SiteEjs</title>
-  </head>
+<% layout("/layouts/boilerplate")%>
   <body>
     <h3>All Listings</h3>
-    <form method="GET" action="/list/new">
+    <!-- <form method="GET" action="/list/new">
       <button> create new listing</button>
-    </form>
-    <ul>
+    </form> -->
+    
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
       <% for(let lists of houseList){ %>
-      <li><a href="/list/<%= lists._id %>"/><%= lists.title %></li>
-      <% }%>
-    </ul>
+        <div class="card col">
+          <img src="<%= lists.image.url %>" class="card-img-top" style="height:20rem" alt="img-house">
+          <div class="card-body">
+            <h5 class="card-title"><%= lists.title %></h5>
+            <p class="card-text">&#8377;
+              <%= lists.price.toLocaleString("en-IN") %>/night</a>
+              </p>
+          </div>
+        </div>
+        <% }%>
+    </div>
   </body>
-</html>

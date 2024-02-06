@@ -5,6 +5,7 @@ const dbConn = require("./init/db");
 const Listing = require("./models/listing.js");
 const path = require("path");
 const over_ride = require("method-override");
+const ejsMate = require("ejs-mate");
 
 dotenv.config();
 
@@ -17,7 +18,9 @@ let PORT = process.env.PORT;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true })); //data coming in req get parsed
-app.use(over_ride("_method"))
+app.use(over_ride("_method"));
+app.engine("ejs",ejsMate);
+app.use(express.static(path.join(__dirname,'/public')))
 
 app.get("/", (req, res) => {
   res.send("fine looking site");
