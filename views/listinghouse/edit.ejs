@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Edit Your Listings</h1>
-    <form method="POST" action="/list/<%= listing._id %>?method=PUT">
+    <form method="POST" action="/list/<%= listing._id %>?_method=PUT">
         <input name="lists[title]" value="<%= listing.title %>" type="text" /><br /><br />
         <textarea name="lists[description]"><%= listing.description %></textarea
         ><br /><br />
@@ -21,5 +21,6 @@
         <input name="lists[location]"  value="<%= listing.location %>" type="text" /><br /><br /><br />
         <button>Add</button>
       </form>
+      
 </body>
 </html>

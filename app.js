@@ -56,10 +56,18 @@ app.get("/list/:id/edit",async (req,res)=>{
 //update Route
 app.put("/list/:id",async (req,res)=>{
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id,{...req.body.listing});
+  await Listing.findByIdAndUpdate(id,{...req.body.lists});
   res.redirect("/list");
 })
  
+
+app.delete("/list/:id",async(req,res)=>{
+  let {id}= req.params;
+  let deleting = await Listing.findByIdAndDelete(id);
+console.log(deleting);
+res.redirect("/list");
+})
+
 app.listen(PORT, () => {
   console.log(`listening this at ${LOCALHOST}${PORT}`);
 });
