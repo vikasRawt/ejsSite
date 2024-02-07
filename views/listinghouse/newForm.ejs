@@ -1,24 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <form method="POST" action="/list">
-      <input name="lists[title]" placeholder="enter title" type="text" /><br /><br />
-      <textarea name="lists[description]" placeholder="enter description"></textarea
-      ><br /><br />
-      <input name="lists[image]" placeholder="enter image URL" type="text" /><br /><br />
-      <input name="lists[price]" placeholder="enter price" type="text" /><br /><br />
+<% layout("/layouts/boilerplate")%>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <br/>
+    <h3>New Listing</h3>
+    <div  class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <form method="POST" action="/list">
       <input
+        name="lists[title]"
+        placeholder="enter title"
+        type="text"
+        class="form-control"
+      />
+    </div>
+   <div  class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      name="lists[description]"
+      placeholder="enter description"
+      class="form-control"
+    ></textarea
+    >
+   </div>
+      <div  class="mb-2">
+        <label for="image" class="form-label">Image Link</label>
+        <input
+        name="lists[image]"
+        placeholder="enter image URL"
+        type="text"
+        class="form-control"
+      />
+      </div>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="price" class="form-label">Price</label>
+        <input
+        name="lists[price]"
+        placeholder="enter price"
+        type="text"
+        class="form-control"
+      />
+      </div>
+      <div class="col-md-8">
+        <label for="country" class="form-label">Country</label>
+        <input
         name="lists[country]"
         placeholder="enter country name"
         type="text"
-      /><br /><br />
-      <input name="lists[location]" placeholder="enterlocation" type="text" /><br /><br /><br />
-      <button>Add</button>
+        class="form-control"
+      />
+      </div>
+    </div>
+     <div class="mb-3">
+      <label for="image" class="form-label">Location</label>
+      <input
+      name="lists[location]"
+      placeholder="enter location"
+      type="text"
+      class="form-control"
+    />
+     </div>
+      <button class="add-btn">Add</button>
     </form>
-  </body>
-</html>
+  </div>
+  </div>
+
