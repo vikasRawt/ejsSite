@@ -3,15 +3,18 @@
       <div class="col-8 offset-2">
         <br/>
     <h3>New Listing</h3>
+    <form method="POST" action="/list" novalidate class="needs-validation">
     <div  class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <form method="POST" action="/list">
       <input
         name="lists[title]"
         placeholder="enter title"
         type="text"
         class="form-control"
+        required
       />
+      <div class="valid-feedback">Title looks good</div>
+      <div class="invalid-feedback">please enter a valid title</div>
     </div>
    <div  class="mb-3">
     <label for="description" class="form-label">Description</label>
@@ -19,8 +22,11 @@
       name="lists[description]"
       placeholder="enter description"
       class="form-control"
+      required
     ></textarea
     >
+    <div class="valid-feedback">description looks good</div>
+    <div class="invalid-feedback">please enter a valid description</div>
    </div>
       <div  class="mb-2">
         <label for="image" class="form-label">Image Link</label>
@@ -30,6 +36,7 @@
         type="text"
         class="form-control"
       />
+      <div class="invalid-feedback">please enter a valid Link</div>
       </div>
     <div class="row mb-3">
       <div class="col-md-4">
@@ -39,7 +46,9 @@
         placeholder="enter price"
         type="text"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">please enter a valid Price</div>
       </div>
       <div class="col-md-8">
         <label for="country" class="form-label">Country</label>
@@ -48,7 +57,9 @@
         placeholder="enter country name"
         type="text"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">please enter a valid Country</div>
       </div>
     </div>
      <div class="mb-3">
@@ -58,7 +69,9 @@
       placeholder="enter location"
       type="text"
       class="form-control"
+      required
     />
+    <div class="invalid-feedback">please enter a valid Location</div>
      </div>
       <button class="add-btn">Add</button>
     </form>
