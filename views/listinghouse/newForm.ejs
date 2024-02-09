@@ -1,80 +1,78 @@
 <% layout("/layouts/boilerplate")%>
-    <div class="row">
-      <div class="col-8 offset-2">
-        <br/>
+<div class="row">
+  <div class="col-8 offset-2">
+    <br />
     <h3>New Listing</h3>
     <form method="POST" action="/list" novalidate class="needs-validation">
-    <div  class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input
-        name="lists[title]"
-        placeholder="enter title"
-        type="text"
-        class="form-control"
-        required
-      />
-      <div class="valid-feedback">Title looks good</div>
-      <div class="invalid-feedback">please enter a valid title</div>
-    </div>
-   <div  class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea
-      name="lists[description]"
-      placeholder="enter description"
-      class="form-control"
-      required
-    ></textarea
-    >
-    <div class="valid-feedback">description looks good</div>
-    <div class="invalid-feedback">please enter a valid description</div>
-   </div>
-      <div  class="mb-2">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          name="lists[title]"
+          placeholder="enter title"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="valid-feedback">Title looks good</div>
+        <div class="invalid-feedback">please enter a valid title</div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="lists[description]"
+          placeholder="enter description"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="valid-feedback">description looks good</div>
+        <div class="invalid-feedback">please enter a valid description</div>
+      </div>
+      <div class="mb-2">
         <label for="image" class="form-label">Image Link</label>
         <input
-        name="lists[image]"
-        placeholder="enter image URL"
-        type="text"
-        class="form-control"
-      />
-      <div class="invalid-feedback">please enter a valid Link</div>
+          name="lists[image][url]"
+          placeholder="enter image URL"
+          type="text"
+          class="form-control"
+        />
+        <div class="invalid-feedback">please enter a valid Link</div>
       </div>
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="price" class="form-label">Price</label>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input
+            name="lists[price]"
+            placeholder="enter price"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">please enter a valid Price</div>
+        </div>
+        <div class="col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            name="lists[country]"
+            placeholder="enter country name"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">please enter a valid Country</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Location</label>
         <input
-        name="lists[price]"
-        placeholder="enter price"
-        type="text"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">please enter a valid Price</div>
+          name="lists[location]"
+          placeholder="enter location"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">please enter a valid Location</div>
       </div>
-      <div class="col-md-8">
-        <label for="country" class="form-label">Country</label>
-        <input
-        name="lists[country]"
-        placeholder="enter country name"
-        type="text"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">please enter a valid Country</div>
-      </div>
-    </div>
-     <div class="mb-3">
-      <label for="image" class="form-label">Location</label>
-      <input
-      name="lists[location]"
-      placeholder="enter location"
-      type="text"
-      class="form-control"
-      required
-    />
-    <div class="invalid-feedback">please enter a valid Location</div>
-     </div>
       <button class="add-btn">Add</button>
     </form>
   </div>
-  </div>
-
+</div>

@@ -7,10 +7,9 @@ const houseSchema = new mongoose.Schema({
   },
   description: String,
   image: {
-      filename: String,
       url:String   
      },
-  price: String,
+  price: Number,
   location: String,
   country: String,
 });

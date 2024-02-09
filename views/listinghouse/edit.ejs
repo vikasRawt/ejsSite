@@ -22,7 +22,7 @@
   <div>
     <label for="image" class="form-label">Image Link</label>
     <input
-      name="lists[image]"
+      name="lists[image][url]"
       class="form-control"
       value="<%= listing.image.url %>"
       type="text"
@@ -58,7 +58,7 @@
       class="form-control"
       value="<%= listing.location %>"
       type="text"
-      required
+      required 
     />
   </div>
   <button class="edit-btn">Edit</button>

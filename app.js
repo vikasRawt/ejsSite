@@ -6,6 +6,8 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const over_ride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js");
+const expressError = require("./utils/ExpressError.js");
 
 dotenv.config();
 
@@ -19,57 +21,91 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true })); //data coming in req get parsed
 app.use(over_ride("_method"));
-app.engine("ejs",ejsMate);
-app.use(express.static(path.join(__dirname,'/public')))
+app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/", (req, res) => {
   res.send("fine looking site");
 });
 
-app.get("/list", async (req, res) => {
-  const houseList = await Listing.find({});
-  res.render("listinghouse/index.ejs", { houseList });
-});
+app.get(
+  "/list",
+  wrapAsync(async (req, res) => {
+    const houseList = await Listing.find({});
+    res.render("listinghouse/index.ejs", { houseList });
+  })
+);
 
 //lists route
-app.get("/list/new", (req, res) => {
-  res.render("listinghouse/newForm.ejs");
-});
+app.get(
+  "/list/new",
+  wrapAsync((req, res) => {
+    res.render("listinghouse/newForm.ejs");
+  })
+);
 
 //create Route
-app.post("/list", async (req, res) => {
-  const newLists = new Listing(req.body.lists);
-  await newLists.save();
-  res.redirect("/list");
-});
+app.post(
+  "/list",
+  wrapAsync(async (req, res, next) => {
+    const newLists = new Listing(req.body.lists);
+    await newLists.save();
+    res.redirect("/list");
+  })
+);
 
-app.get("/list/:id", async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("./listinghouse/show.ejs", { listing });
-});
+app.get(
+  "/list/:id",
+  wrapAsync(async (req, res) => {
+    try {
+      let { id } = req.params;
+      const listing = await Listing.findById(id);
+      res.render("./listinghouse/show.ejs", { listing });
+    } catch (error) {
+      console.log("Error is iq:-", error);
+    }
+  })
+);
 
 //edit Route
-app.get("/list/:id/edit",async (req,res)=>{
-  let { id } = req.params;
-  const listing = await Listing.findById(id);
-  res.render("listinghouse/edit.ejs",{listing})
-})
+app.get(
+  "/list/:id/edit",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("listinghouse/edit.ejs", { listing });
+  })
+);
 
 //update Route
-app.put("/list/:id",async (req,res)=>{
-  let { id } = req.params;
-  await Listing.findByIdAndUpdate(id,{...req.body.lists});
-  res.redirect(`/list/${id}`);
-})
- 
+app.put(
+  "/list/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, { ...req.body.lists });
+    res.redirect(`/list/${id}`);
+  })
+);
 
-app.delete("/list/:id",async(req,res)=>{
-  let {id}= req.params;
-  let deleting = await Listing.findByIdAndDelete(id);
-console.log(deleting);
-res.redirect("/list");
-})
+app.delete(
+  "/list/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let deleting = await Listing.findByIdAndDelete(id);
+    console.log(deleting);
+    res.redirect("/list");
+  })
+);
+
+app.all("*", (req, res, next) => {
+  next(new expressError(404, "page not found"));
+});
+
+app.use((err, req, res, next) => {
+  let { statusCode, message } = err;
+  res.status(statusCode).send(message);
+  res.send("something went wrong!");
+});
 
 app.listen(PORT, () => {
   console.log(`listening this at ${LOCALHOST}${PORT}`);
