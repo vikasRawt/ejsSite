@@ -8,6 +8,7 @@ const over_ride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const expressError = require("./utils/ExpressError.js");
+const listingSchema = require("./schema.js");
 
 dotenv.config();
 
@@ -49,6 +50,12 @@ app.post(
   "/list",
   wrapAsync(async (req, res, next) => {
     const newLists = new Listing(req.body.lists);
+    if(!newLists.image.url){
+      newLists.image.url = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mountainliving.com%2Fthe-top-10-mountain-homes-of-2020%2F&psig=AOvVaw2ix9diBuSp1uvYoXcijdpQ&ust=1707582134936000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKDis6zVnoQDFQAAAAAdAAAAABAI"
+    }
+    if(!newLists.image.filename){
+      newLists.image.filename = "listingimage";
+    }
     await newLists.save();
     res.redirect("/list");
   })
